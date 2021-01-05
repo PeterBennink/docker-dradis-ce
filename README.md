@@ -1,15 +1,15 @@
 # Docker Image for Dradis CE
 
-[![GitHub](http://img.shields.io/badge/github-maliciousactor/docker--dradis--ce-blue.svg?style=plastic)](https://github.com/maliciousactor/docker-dradis-ce/)
-[![Build Status](https://img.shields.io/travis/com/maliciousactor/docker-dradis-ce?style=plastic)](https://travis-ci.com/maliciousactor/docker-dradis-ce) [![Docker Pulls](https://img.shields.io/docker/pulls/maliciousactor/dradis-ce?style=plastic)](https://hub.docker.com/r/maliciousactor/dradis-ce)
+[![GitHub](http://img.shields.io/badge/github-peterbennink/docker--dradis--ce-blue.svg?style=plastic)](https://github.com/peterbennink/docker-dradis-ce/)
+[![Build Status](https://img.shields.io/travis/com/peterbennink/docker-dradis-ce?style=plastic)](https://travis-ci.com/peterbennink/docker-dradis-ce) [![Docker Pulls](https://img.shields.io/docker/pulls/peterbennink/docker-dradis-ce?style=plastic)](https://hub.docker.com/r/peterbennink/docker-dradis-ce)
 
 A [Docker](https://www.docker.com/) image for [Dradis CE](https://dradisframework.com/).
 
 ### Supported Tags and Respective `Dockerfile` Links
 
-* `latest` ([*/Dockerfile*](https://github.com/maliciousactor/docker-dradis-ce/blob/master/debian/Dockerfile))
-* `debian` ([*/Dockerfile*](https://github.com/maliciousactor/docker-dradis-ce/blob/master/debian/Dockerfile))
-* `kali` ([*/Dockerfile*](https://github.com/maliciousactor/docker-dradis-ce/blob/master/kali/Dockerfile))
+* `latest` ([*/Dockerfile*](https://github.com/peterbennink/docker-dradis-ce/blob/master/debian/Dockerfile))
+* `debian` ([*/Dockerfile*](https://github.com/peterbennink/docker-dradis-ce/blob/master/debian/Dockerfile))
+* `kali` ([*/Dockerfile*](https://github.com/peterbennink/docker-dradis-ce/blob/master/kali/Dockerfile))
 
 ---
 
@@ -23,11 +23,11 @@ A [Docker](https://www.docker.com/) image for [Dradis CE](https://dradisframewor
 
 ##### Pull Docker Image
 
-    $ docker pull maliciousactor/dradis-ce
+    $ docker pull peterbennink/docker-dradis-ce
 
 ##### Create Database Directory
 
-    $ mkdir -p ~/docker/dradis-ce/data
+    $ mkdir -p ~/.config/dradis-ce/data
 
 ##### Run Dradis CE
 
@@ -35,7 +35,7 @@ A [Docker](https://www.docker.com/) image for [Dradis CE](https://dradisframewor
         --name dradis-ce
         --publish 3000:3000 \
         --volume "~/docker/dradis-ce/data:/data" \
-      maliciousactor/dradis-ce
+      peterbennink/docker-dradis-ce
 
 ##### Use Dradis CE
 
@@ -59,7 +59,7 @@ As such, it is strongly recommended to place this behind a proxy, such as nginx,
 
 Build the Docker image from source instead of pulling it from Docker Hub:
 
-    $ git clone https://github.com/maliciousactor/docker-dradis-ce docker-dradis-ce
+    $ git clone https://github.com/peterbennink/docker-dradis-ce docker-dradis-ce
     $ cd docker-dradis-ce
-    $ docker build -t maliciousactor/dradis-ce .
+    $ docker build -t peterbennink/docker-dradis-ce .
 
