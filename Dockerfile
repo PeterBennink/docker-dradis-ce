@@ -8,25 +8,21 @@ ENV RAILS_ENV development
 # install dependencies
 RUN apt update && \
     DEBIAN_FRONTEND=noninteractive apt install $APT build-essential gcc git libmariadbd-dev \
-        libsqlite3-dev make nodejs patch wget zlib1g-dev yarn
-
+        libsqlite3-dev make nodejs patch zlib1g-dev yarn && \
 # fetch and configure dradis
-RUN git clone https://github.com/dradis/dradis-ce.git /app && \
+    git clone https://github.com/dradis/dradis-ce.git /app && \
     sed -i "s/ruby '2.4.1'/ruby '\>\= 2.4.1'/" /app/Gemfile && \
     sed -i 's@database:\s*db@database: /data@' /app/config/database.yml.template && \
     sed -i 's/config.force_ssl = true/config.force_ssl = false/' /app/config/environments/production.rb && \
-    sed -i 's/:uglifier/Uglifier.new(harmony: true)/' /app/config/environments/production.rb
-
+    sed -i 's/:uglifier/Uglifier.new(harmony: true)/' /app/config/environments/production.rb && \
 # ruby init
-RUN gem update --system
-
+    gem update --system && \
 # install dradis
-RUN mkdir /data && \
+    mkdir /data && \
     cd /app && ruby bin/setup && bundle exec rake assets:precompile && \
-    sed -i '/gem/s/^# *//' /app/Gemfile.plugins && bundle install
-
+    sed -i '/gem/s/^# *//' /app/Gemfile.plugins && bundle install && \
 # clean image
-RUN DEBIAN_FRONTEND=noninteractive \
+    DEBIAN_FRONTEND=noninteractive \
     apt remove -y --purge build-essential gcc libmariadbd-dev libsqlite3-dev make patch wget zlib1g-dev && \
     DEBIAN_FRONTEND=noninteractive apt install $APT libmariadb3 libsqlite3-0 zlib1g && \
     DEBIAN_FRONTEND=noninteractive apt autoremove -y && \
