@@ -3,13 +3,7 @@
 [![GitHub](http://img.shields.io/badge/github-peterbennink/docker--dradis--ce-blue.svg?style=plastic)](https://github.com/peterbennink/docker-dradis-ce/)
 [![Build Status](https://img.shields.io/travis/com/peterbennink/docker-dradis-ce?style=plastic)](https://travis-ci.com/peterbennink/docker-dradis-ce) [![Docker Pulls](https://img.shields.io/docker/pulls/peterbennink/docker-dradis-ce?style=plastic)](https://hub.docker.com/r/peterbennink/docker-dradis-ce)
 
-A [Docker](https://www.docker.com/) image for [Dradis CE](https://dradisframework.com/).
-
-### Supported Tags and Respective `Dockerfile` Links
-
-* `latest` ([*/Dockerfile*](https://github.com/peterbennink/docker-dradis-ce/blob/master/debian/Dockerfile))
-* `debian` ([*/Dockerfile*](https://github.com/peterbennink/docker-dradis-ce/blob/master/debian/Dockerfile))
-* `kali` ([*/Dockerfile*](https://github.com/peterbennink/docker-dradis-ce/blob/master/kali/Dockerfile))
+A [Docker](https://www.docker.com/) image for [Dradis CE](https://dradisframework.com/). Credits to maliciousactor for the original Dockerfiles, I made an update since the build failed due to some changes in Dradis.
 
 ---
 
