@@ -7,18 +7,8 @@ ENV RAILS_ENV development
 
 # install dependencies
 RUN apt update && \
-    DEBIAN_FRONTEND=noninteractive \
-    apt install $APT \
-        build-essential \
-        gcc \
-        git \
-        libmariadbd-dev \
-        libsqlite3-dev \
-        make \
-        nodejs \
-        patch \
-        wget \
-        zlib1g-dev
+    DEBIAN_FRONTEND=noninteractive apt install $APT build-essential gcc git libmariadbd-dev \
+        libsqlite3-dev make nodejs patch wget zlib1g-dev yarn
 
 # fetch and configure dradis
 RUN git clone https://github.com/dradis/dradis-ce.git /app && \
@@ -32,29 +22,14 @@ RUN gem update --system
 
 # install dradis
 RUN mkdir /data && \
-    cd /app && \
-        ruby bin/setup && \
-        bundle exec rake assets:precompile
+    cd /app && ruby bin/setup && bundle exec rake assets:precompile && \
+    sed -i '/gem/s/^# *//' /app/Gemfile.plugins && bundle install
 
 # clean image
 RUN DEBIAN_FRONTEND=noninteractive \
-    apt remove -y --purge \
-        build-essential \
-        gcc \
-        git \
-        libmariadbd-dev \
-        libsqlite3-dev \
-        make \
-        patch \
-        wget \
-        zlib1g-dev && \
-    DEBIAN_FRONTEND=noninteractive \
-    apt install $APT \
-        libmariadb3 \
-        libsqlite3-0 \
-        zlib1g && \
-    DEBIAN_FRONTEND=noninteractive \
-    apt autoremove -y && \
+    apt remove -y --purge build-essential gcc libmariadbd-dev libsqlite3-dev make patch wget zlib1g-dev && \
+    DEBIAN_FRONTEND=noninteractive apt install $APT libmariadb3 libsqlite3-0 zlib1g && \
+    DEBIAN_FRONTEND=noninteractive apt autoremove -y && \
     rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/* && \
     rm -rf /data/development.sqlite3
 
