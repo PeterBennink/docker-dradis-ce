@@ -8,7 +8,7 @@ ENV RAILS_ENV development
 # install dependencies
 RUN apt update && \
     DEBIAN_FRONTEND=noninteractive apt install $APT build-essential gcc git libmariadbd-dev \
-        libsqlite3-dev make nodejs patch zlib1g-dev yarn && \
+        libsqlite3-dev make nodejs patch zlib1g-dev && \
 # fetch and configure dradis
     git clone https://github.com/dradis/dradis-ce.git /app && \
     sed -i "s/ruby '2.4.1'/ruby '\>\= 2.4.1'/" /app/Gemfile && \
@@ -27,7 +27,8 @@ RUN apt update && \
     DEBIAN_FRONTEND=noninteractive apt install $APT libmariadb3 libsqlite3-0 zlib1g && \
     DEBIAN_FRONTEND=noninteractive apt autoremove -y && \
     rm -rf /var/cache/apt/archives/* /var/lib/apt/lists/* && \
-    rm -rf /data/development.sqlite3
+    rm -rf /data/development.sqlite3 && \
+    rm -rf /app/vendor/bundle/ruby/2.5.0/cache /usr/local/bundle/cache
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x entrypoint.sh
